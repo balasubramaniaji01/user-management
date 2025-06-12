@@ -1,0 +1,70 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  >div {
+    width: 25%;
+
+    >div:last-child {
+      >form {
+        // >div:not(:last-child) {
+        //   margin-bottom: 2.5em;
+        // }
+
+        >div:last-child {
+          >button {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+
+  // &.app-light {
+  //   background-color: #fff;
+  //   color: #111;
+
+  //   .login-card {
+  //     background-color: #f9f9f9;
+  //     color: #111;
+  //   }
+
+  //   .ant-input,
+  //   .ant-input-password {
+  //     background-color: #fff;
+  //     color: #111;
+  //     border-color: #ccc;
+  //   }
+
+  //   .ant-btn {
+  //     background-color: #e0e0e0;
+  //     color: #111;
+  //     border-color: #ccc;
+  //   }
+  // }
+
+  // &.app-dark {
+  //   background-color: #1e1e1e;
+  //   color: #f5f5f5;
+
+  //   .login-card {
+  //     background-color: #2a2a2a;
+  //     color: #f5f5f5;
+  //   }
+
+  //   .ant-input,
+  //   .ant-input-password {
+  //     background-color: #2b2b2b;
+  //     color: #f5f5f5;
+  //     border-color: #555;
+  //   }
+
+  //   .ant-btn {
+  //     background-color: #333;
+  //     color: #f5f5f5;
+  //     border-color: #444;
+  //   }
+  // }
+}
