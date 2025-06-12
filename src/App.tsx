@@ -1,12 +1,8 @@
 import React from 'react';
-import './App.css';
+import styles from './app.module.scss';
 
-function App() {
-  return (
-    <div className="App">
-      hiii
-    </div>
-  );
-}
+const App: React.FC = () => {
+  return <div className={styles.app}>erfer</div>;
+};
 
 export default App;
