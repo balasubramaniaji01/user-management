@@ -1,0 +1,23 @@
+@use '../../../styles/themes';
+
+.headerWrapper {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+
+  >div {
+    display: flex;
+    justify-content: end;
+    gap: 1em;
+    padding: 0.5em 2em;
+    align-items: center;
+
+    >span:last-child {
+      background-color: var(--logout-bg);
+      padding: .3em;
+
+      >svg {
+        cursor: pointer;
+      }
+    }
+  }
+}

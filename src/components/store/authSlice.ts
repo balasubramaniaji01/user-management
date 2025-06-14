@@ -5,7 +5,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  isAuthenticated: sessionStorage.getItem('auth') === 'true',
+  isAuthenticated: localStorage.getItem('auth') === 'true',
 };
 
 const authSlice = createSlice({
@@ -14,15 +14,15 @@ const authSlice = createSlice({
   reducers: {
     login: state => {
       state.isAuthenticated = true;
-      sessionStorage.setItem('auth', 'true');
+      localStorage.setItem('auth', 'true');
     },
     logout: state => {
       state.isAuthenticated = false;
-      sessionStorage.removeItem('auth');
+      localStorage.removeItem('auth');
     },
     setAuthenticated(state, action) {
       state.isAuthenticated = action.payload;
-      sessionStorage.setItem('auth', 'true');
+      localStorage.setItem('auth', 'true');
     },
   },
 });

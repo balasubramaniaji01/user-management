@@ -7,9 +7,24 @@ export const userService = {
 
   getUsers: () => api.get(API_URLS.userList),
 
-  getUserById: (id: string) => api.get(API_URLS.userDetails(id)),
+  getUserById: (id: number) => api.get(API_URLS.userDetails(id)),
 
-  updateUser: (id: string, data: unknown) => api.put(API_URLS.updateUser(id), data),
+  updateUser: (
+    id: string,
+    data: {
+      first_name: string;
+      last_name: string;
+      email: string;
+      avatar: string;
+    }
+  ) => api.put(API_URLS.updateUser(id), data),
 
   deleteUser: (id: string) => api.delete(API_URLS.deleteUser(id)),
+
+  createUser: (credentials: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar: string;
+  }) => api.post(API_URLS.createUser, credentials),
 };

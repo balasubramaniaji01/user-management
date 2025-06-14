@@ -5,27 +5,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import './styles/login.scss';
 import { RootState } from '../components/store';
 import { userService } from '../services/userService';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { setAuthenticated } from '../components/store/authSlice';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const theme = useSelector((state: RootState) => state.theme.mode);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (values: { email: string; password: string }) => {
     await userService.login({ email: values.email, password: values.password });
     dispatch(setAuthenticated(true));
 
-    Swal.fire({
-      title: 'Login Successful!',
-      text: `Welcome, ${values.email}`,
-      icon: 'success',
-      confirmButtonText: 'OK',
-    }).then(() => {
-      navigate('/users');
-    });
+    // Swal.fire({
+    //   title: 'Login Successful!',
+    //   text: `Welcome, ${values.email}`,
+    //   icon: 'success',
+    //   confirmButtonText: 'OK',
+    // }).then(() => {
+    //   navigate('/users', { replace: true });
+    // });
   };
 
   return (

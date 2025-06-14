@@ -2,7 +2,7 @@
 
 body {
   background-color: var(--bg);
-  color: var(--text);  // This should pick up your updated light theme text color (#ca4444)
+  color: var(--text);
   font-family: sans-serif;
   transition: background 0.3s, color 0.3s;
 }
