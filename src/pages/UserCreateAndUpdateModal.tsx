@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Button, Space } from 'antd';
 import { ProForm, ProFormText } from '@ant-design/pro-components';
 import { userService } from '../services/userService';
 import { useDispatch } from 'react-redux';
-import { setUserList } from '../components/store/userListSlice';
+import { setSingleUser, setUserList } from '../components/store/userListSlice';
 
 interface FormValues {
+  data: any;
   first_name: string;
   last_name: string;
   email: string;
@@ -29,6 +30,7 @@ const UserCreateAndUpdateModal: React.FC<UserCreateAndUpdateModalProps> = ({
   totalCount,
 }) => {
   const dispatch = useDispatch();
+
   const { email, first_name, last_name, avatar, id } =
     typeof isModalOpen === 'object' && isModalOpen !== null
       ? isModalOpen
@@ -71,6 +73,23 @@ const UserCreateAndUpdateModal: React.FC<UserCreateAndUpdateModalProps> = ({
       );
     }
   };
+
+  useEffect(() => {
+    userService.getSingleUser(id || '').then(res => {
+      const user = res.data as FormValues;
+      if (user) {
+        dispatch(
+          setSingleUser({
+            first_name: user.data.first_name,
+            last_name: user.data.last_name,
+            email: user.data.email,
+            avatar: user.data.avatar,
+            id: user.data.id,
+          })
+        );
+      }
+    });
+  }, []);
 
   return (
     <Modal
@@ -127,10 +146,10 @@ const UserCreateAndUpdateModal: React.FC<UserCreateAndUpdateModalProps> = ({
           placeholder="Enter avatar image URL"
           rules={[
             { required: true, message: 'Avatar URL is required' },
-            // {
-            //   pattern: /^(https?:\/\/)?([a-z0-9]+\.)+[a-z]{2,6}\/?$/,
-            //   message: 'Please enter a valid URL (e.g., https://example.com)',
-            // },
+            {
+              pattern: /^https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp)$/i,
+              message: 'Please enter a valid image URL (e.g., https://example.com/image.jpg)',
+            },
           ]}
         />
       </ProForm>

@@ -18,7 +18,6 @@ const UserList = () => {
 
   const usersData = useSelector((state: RootState) => state.user);
   const tableData = usersData?.userList || [];
-
   const isLoading = usersData?.isLoading || false;
 
   const fetchUserList = useCallback(

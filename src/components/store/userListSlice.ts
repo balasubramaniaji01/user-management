@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 interface UserListState {
   userList: {
@@ -9,6 +9,13 @@ interface UserListState {
     data: string[];
   };
   isLoading: boolean;
+  userDetails: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar: string;
+    id: string;
+  };
 }
 
 const initialState: UserListState = {
@@ -20,6 +27,13 @@ const initialState: UserListState = {
     data: [],
   },
   isLoading: false,
+  userDetails: {
+    first_name: '',
+    last_name: '',
+    email: '',
+    avatar: '',
+    id: '',
+  },
 };
 
 const userListSlice = createSlice({
@@ -32,7 +46,10 @@ const userListSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setSingleUser: (state, action) => {
+      state.userDetails = action.payload;
+    },
   },
 });
-export const { setUserList, setLoading } = userListSlice.actions;
+export const { setUserList, setLoading, setSingleUser } = userListSlice.actions;
 export default userListSlice.reducer;

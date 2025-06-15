@@ -7,4 +7,5 @@ export const API_URLS = {
   createUser: '/users',
   updateUser: (id: string) => `${BASE_URL}/users/${id}`,
   deleteUser: (id: string) => `/users/${id}`,
+  singleUser: (id: string) => `/users/${id}`,
 };

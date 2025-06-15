@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <div className={`loginContainer ${theme}`}>
-      <Card className="login-card" title="Login">
+      <Card title="Login">
         <ProForm
           onFinish={handleSubmit}
           initialValues={{ rememberMe: true }}

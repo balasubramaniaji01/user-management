@@ -23,7 +23,7 @@ Vercel: https://user-management-rho-mocha.vercel.app/
 - **Axios** (for API calls)
 - **Prettier & ESLint** (for code formatting and linting)
 - **TypeScript** (for static type checking)
-- **CSS** (for styling)
+- **SASS** (for styling)
 
 ## Setup and Installation
 

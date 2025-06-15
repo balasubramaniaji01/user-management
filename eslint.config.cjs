@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const js = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const react = require('eslint-plugin-react');
@@ -21,12 +23,18 @@ module.exports = [
       parserOptions: {
         project: './tsconfig.json',
         sourceType: 'module'
+      },
+      globals: {
+        require: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        browser: true,
+        es2021: true,
+        node: true,
       }
-    },
-    env: {
-      browser: true,
-      es2021: true,
-      node: true,
     },
     rules: {
       'prettier/prettier': 'error',

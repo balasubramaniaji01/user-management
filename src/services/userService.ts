@@ -9,6 +9,8 @@ export const userService = {
 
   getUserById: (id: number) => api.get(API_URLS.userDetails(id)),
 
+  getSingleUser: (id: string) => api.get(API_URLS.singleUser(id)),
+
   updateUser: (
     id: string,
     data: {
