@@ -3,20 +3,29 @@
 .headerWrapper {
   background-color: var(--header-bg);
   color: var(--header-text);
+      padding: 1em 2em;
 
   >div {
     display: flex;
-    justify-content: end;
-    gap: 1em;
-    padding: 0.5em 2em;
-    align-items: center;
+    justify-content: space-between;
 
-    >span:last-child {
-      background-color: var(--logout-bg);
-      padding: .3em;
+    >img {
+      width: 2%;
+    }
 
-      >svg {
-        cursor: pointer;
+    >div:last-child {
+      display: flex;
+      justify-content: end;
+      gap: 1em;
+      align-items: center;
+
+      >span:last-child {
+        background-color: var(--logout-bg);
+        padding: .3em;
+
+        >svg {
+          cursor: pointer;
+        }
       }
     }
   }

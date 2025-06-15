@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Card, Tooltip } from 'antd';
+import { Button, Card, Modal, Tooltip } from 'antd';
 import DataFlexView from '../api/commonComponents/DataFlexView';
 import { setLoading, setUserList } from '../components/store/userListSlice';
 import { userService } from '../services/userService';
@@ -14,6 +14,8 @@ const UserList = () => {
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState<any | null>(null);
+  const [deletingUser, setDeletingUser] = useState<any | null>(null);
+
   const usersData = useSelector((state: RootState) => state.user);
   const tableData = usersData?.userList || [];
 
@@ -36,7 +38,25 @@ const UserList = () => {
   };
 
   const handleDelete = (record: any) => {
-    console.log('Delete:', record);
+    setDeletingUser(record);
+  };
+
+  const confirmDelete = async () => {
+    if (!deletingUser?.id) return;
+
+    await userService.deleteUser(deletingUser.id);
+    setDeletingUser(null);
+
+    const updatedData = {
+      ...tableData,
+      data: tableData.data.filter((user: any) => user.id !== deletingUser.id),
+    };
+
+    dispatch(setUserList(updatedData));
+  };
+
+  const cancelDelete = () => {
+    setDeletingUser(null);
   };
 
   const createUser = () => {
@@ -89,11 +109,7 @@ const UserList = () => {
     },
   ];
 
-  const renderCard = (
-    item: any,
-    onEdit?: (record: any) => void,
-    onDelete?: (record: any) => void
-  ) => (
+  const renderCard = (item: any) => (
     <Card key={item.id} className="customCard">
       <div className="cardContent">
         <div className="cardAvatar">
@@ -117,7 +133,7 @@ const UserList = () => {
         </Tooltip>
         <Tooltip title="Delete">
           <Button
-            onClick={() => onDelete?.(item)}
+            onClick={() => handleDelete?.(item)}
             color="danger"
             variant="solid"
             shape="circle"
@@ -148,10 +164,27 @@ const UserList = () => {
         <UserCreateAndUpdateModal
           totalCount={tableData?.total || 0}
           tableData={tableData?.data || []}
+          tableMetadata={tableData}
           isModalOpen={isModalOpen}
           onClose={handleModalClose}
         />
       )}
+      <Modal
+        title="Delete User"
+        open={!!deletingUser}
+        onOk={confirmDelete}
+        onCancel={cancelDelete}
+        okText="Yes, Delete"
+        cancelText="Cancel"
+      >
+        <p>
+          Are you sure you want to delete{' '}
+          <strong>
+            {deletingUser?.first_name} {deletingUser?.last_name}
+          </strong>
+          ?
+        </p>
+      </Modal>
     </div>
   );
 };

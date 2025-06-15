@@ -18,12 +18,14 @@ interface UserCreateAndUpdateModalProps {
   onClose?: () => void;
   tableData: any[];
   totalCount: number;
+  tableMetadata: any;
 }
 
 const UserCreateAndUpdateModal: React.FC<UserCreateAndUpdateModalProps> = ({
   isModalOpen,
   onClose,
   tableData,
+  tableMetadata,
   totalCount,
 }) => {
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ const UserCreateAndUpdateModal: React.FC<UserCreateAndUpdateModalProps> = ({
 
       dispatch(
         setUserList({
-          ...tableData,
+          ...tableMetadata,
           data: updatedData,
         })
       );
@@ -123,7 +125,13 @@ const UserCreateAndUpdateModal: React.FC<UserCreateAndUpdateModalProps> = ({
           name="avatar"
           label="Avatar URL"
           placeholder="Enter avatar image URL"
-          rules={[{ required: true, message: 'Avatar URL is required' }]}
+          rules={[
+            { required: true, message: 'Avatar URL is required' },
+            // {
+            //   pattern: /^(https?:\/\/)?([a-z0-9]+\.)+[a-z]{2,6}\/?$/,
+            //   message: 'Please enter a valid URL (e.g., https://example.com)',
+            // },
+          ]}
         />
       </ProForm>
     </Modal>

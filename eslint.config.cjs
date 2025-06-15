@@ -23,6 +23,11 @@ module.exports = [
         sourceType: 'module'
       }
     },
+    env: {
+      browser: true,
+      es2021: true,
+      node: true,
+    },
     rules: {
       'prettier/prettier': 'error',
       'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
@@ -39,6 +44,7 @@ module.exports = [
       "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 0 }],
       "no-var": "error",
       "jsx-quotes": ["warn", "prefer-double"],
+      '@typescript-eslint/no-explicit-any': 'off'
     },
     settings: {
       react: {
