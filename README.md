@@ -27,11 +27,12 @@ A React application for user authentication and user management, including user 
 
 ### Prerequisites
 
-- Node.js (v12 or higher)
-- npm or yarn
+- Node.js (v20 or higher)
+- npm
 
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/react-user-management.git
-cd react-user-management
+git clone https://github.com/balasubramaniaji01/user-management.git
+cd user-management
+npm i or npm i --legacy-peer-deps
