@@ -5,10 +5,10 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
-const App: React.FC = () => {
-  const Login = lazy(() => import('./pages/Login'));
-  const UserList = lazy(() => import('./pages/UserList'));
+const Login = lazy(() => import('./pages/Login'));
+const UserList = lazy(() => import('./pages/UserList'));
 
+const App: React.FC = () => {
   const theme = useAppSelector((state: RootState) => state.theme.mode);
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const navigate = useNavigate();
