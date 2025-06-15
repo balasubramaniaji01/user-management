@@ -1,5 +1,5 @@
 import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
-import { Card } from 'antd';
+import { notification, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import './styles/login.scss';
@@ -9,15 +9,27 @@ import { setAuthenticated } from '../components/store/authSlice';
 
 const Login = () => {
   const theme = useSelector((state: RootState) => state.theme.mode);
+  const [api, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
 
   const handleSubmit = async (values: { email: string; password: string }) => {
-    await userService.login({ email: values.email, password: values.password });
-    dispatch(setAuthenticated(true));
+    try {
+      const res = await userService.login({ email: values.email, password: values.password });
+
+      if (res) {
+        dispatch(setAuthenticated(true));
+      }
+    } catch {
+      api.error({
+        message: 'Login Failed',
+        description: 'Invalid email or password.',
+      });
+    }
   };
 
   return (
     <div className={`loginContainer ${theme}`}>
+      {contextHolder}
       <Card title="Login">
         <ProForm
           onFinish={handleSubmit}

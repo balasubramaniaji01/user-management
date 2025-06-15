@@ -1,7 +1,7 @@
 const BASE_URL = '/api';
 
 export const API_URLS = {
-  login: `${BASE_URL}/login`,
+  login: `/login`,
   userList: `${BASE_URL}/users`,
   userDetails: (id: number) => `/users?page=${id}`,
   createUser: '/users',

@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { RootState, useAppSelector } from './components/store';
 import './styles/global.scss';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
-import UserList from './pages/UserList';
 import { useSelector } from 'react-redux';
 
 const App: React.FC = () => {
+  const Login = lazy(() => import('./pages/Login'));
+  const UserList = lazy(() => import('./pages/UserList'));
+
   const theme = useAppSelector((state: RootState) => state.theme.mode);
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const navigate = useNavigate();
@@ -23,17 +24,26 @@ const App: React.FC = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route
-        path="/users"
-        element={
-          <ProtectedRoute>
-            <UserList />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+    <Suspense
+      fallback={
+        <div className="loadingContainer">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      }
+    >
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute>
+              <UserList />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Suspense>
   );
 };
 

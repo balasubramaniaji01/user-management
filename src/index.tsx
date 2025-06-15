@@ -9,6 +9,7 @@ import './styles/global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import enUS from 'antd/locale/en_US';
+import 'antd/dist/reset.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
